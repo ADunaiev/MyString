@@ -29,8 +29,8 @@ using namespace std;
 //3) конструктор копирования;
 //4) оператор присваивания;
 //4) деструктор;
-// 
 //5) изменение знака числа(перевод числа в дополнительный код);
+// 
 //8) сложение битовых строк(перегрузить операторы + и += );
 //9) проверка на равенство(= = ) и на неравенство(!= ).
 
@@ -48,6 +48,7 @@ public:
     Bite_String& operator=(const Bite_String& object);
     Bite_String& operator=(Bite_String&& object);
     void empty();
+    Bite_String& sign_change();
     
 };
 Bite_String::Bite_String() 
@@ -190,39 +191,127 @@ void Bite_String::empty()
 }
 Bite_String::~Bite_String()
 {}
+Bite_String& Bite_String::sign_change()
+{
+    if (str_Length <= 1)
+    {
+        cout << "Sign change is impossible" << endl;
+    }
+    else
+    {
+        // from positive to negative
+        if (string[0] == '0')
+        {
+            //change of 0 to 1, and 1 to 0
+            for (size_t i = 0; i < str_Length; i++)
+            {
+                if (string[i] == '0')
+                    string[i] = '1';
+                else
+                    string[i] = '0';
+            }
+            
+            //adding 1
+            int temp = 0;
+
+            if (string[str_Length - 1] == '1')
+            {
+                string[str_Length - 1] = '0';
+                temp = 1;
+            }
+            else
+                string[str_Length - 1] = '1';
+
+            if (str_Length > 2)
+            {
+                for (size_t i = str_Length - 2; i > 0; i--)
+                {
+                    if (string[i] == '1' && temp == 1)
+                    {
+                        string[i] = '0';
+                        temp = 1;
+                    }
+                    else
+                    {
+                        if (temp == 1)
+                        {
+                            string[i] = '1';
+                            temp = 0;
+                        }
+                        else
+                            temp = 0;
+                    }
+                }
+            }
+
+            
+        }
+        else
+        {
+            //adding 1
+            int temp = 0;
+
+            if (string[str_Length - 1] == '1')
+            {
+                string[str_Length - 1] = '0';
+            }
+            else
+            {
+                string[str_Length - 1] = '1';
+                temp = 1;
+            }
+
+            if (str_Length > 2)
+            {
+                for (size_t i = str_Length - 2; i > 0; i--)
+                {
+                    if (string[i] == '0' && temp == 1)
+                    {
+                        string[i] = '1';
+                        temp = 1;
+                    }
+                    else
+                    {
+                        if (temp == 1)
+                        {
+                            string[i] = '0';
+                            temp = 0;
+                        }
+                        else
+                            temp = 0;
+                    }
+                }
+            }
+
+            //change of 0 to 1, and 1 to 0
+            for (size_t i = 0; i < str_Length; i++)
+            {
+                if (string[i] == '0')
+                    string[i] = '1';
+                else
+                    string[i] = '0';
+            }
+
+        }
+    }
+
+    return *this;
+}
 
 int main()
 {          
 
-    Bite_String b1("Rerw");
-    cout << "\nObject b1:";
-    b1.print();
+    //Bite_String b1("Rerw");
+    //cout << "\nObject b1:";
+    //b1.print();
 
-    Bite_String b2("10011010101");
+    Bite_String b2("10000001");
     cout << "\nObject b2:";
     b2.print();
 
-    Bite_String b3(b2);
-    cout << "\nObject b3:";
-    b3.print();
-
-    cout << "\nObject b1:";
-    b1 = b3;
-    b1.print();
-
-    b2 = "10001";
-    cout << "\nObject b2:";
+    b2.sign_change();
+    cout << "\nObject b2 with changed sign:";
     b2.print();
-
-    b2 = "wefqev";
-    cout << "\nObject b2:";
-    b2.print();
-
-
-
-    //cout << "str2 != str1 ? " << (str2 != str1) << endl;
-    //cout << "str3 != str1 ? " << (str1 != str3) << endl;
-
 
     return 0;
 }
