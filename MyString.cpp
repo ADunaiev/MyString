@@ -44,8 +44,13 @@ int MyString::get_str_length()
 }
 void MyString::print()
 {
-	cout << "\nThe string: " << string << endl;
-	cout << "String Length: " << str_Length << endl;
+	if (string != nullptr)
+	{
+		cout << "\nThe string: " << string << endl;
+		cout << "String Length: " << str_Length << endl;
+	}
+	else
+		cout << "Empty object!" << endl;
 }
 void MyString::set_string(const int size)
 {
@@ -269,6 +274,25 @@ MyString operator+(const MyString& left, const MyString& right)
 	temp.MyStrCat(right);
 
 	return temp;
+}
+MyString& MyString::operator+=(const MyString& object)
+{
+	(*this).MyStrCat(object);
+	return *this;
+}
+bool operator==(const MyString& left, const MyString& right)
+{
+	MyString temp;
+	temp = left;
+
+	return !temp.MyStrCmp(right);
+}
+bool operator!=(const MyString& left, const MyString& right)
+{
+	MyString temp;
+	temp = left;
+
+	return temp.MyStrCmp(right);
 }
 MyString::MyString(MyString&& object) 
 	:string{ new char[object.str_Length + 1] }, str_Length{ object.str_Length }

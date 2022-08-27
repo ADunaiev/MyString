@@ -2,6 +2,8 @@
 
 class MyString
 {
+protected:
+
 	char* string;
 	int str_Length;
 
@@ -36,6 +38,9 @@ public:
 	const MyString operator++(int);
 	const MyString operator--(int);
 	friend MyString operator+(const MyString& left, const MyString& right);
+	MyString& operator+=(const MyString& object);
+	friend bool operator==(const MyString& left, const MyString& right);
+	friend bool operator!=(const MyString& left, const MyString& right);
 	char& operator[](int index);
 	char operator[](int index) const;
 	int operator()(char c);
