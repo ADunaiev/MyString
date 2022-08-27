@@ -27,10 +27,10 @@ using namespace std;
 //1) конструктор без параметров;
 //2) конструктор, принимающий в качестве параметра C - строку;
 //3) конструктор копирования;
-// 
 //4) оператор присваивания;
 //4) деструктор;
-//5) изменение знака числа(перевод числа в дополнитель - ный код);
+// 
+//5) изменение знака числа(перевод числа в дополнительный код);
 //8) сложение битовых строк(перегрузить операторы + и += );
 //9) проверка на равенство(= = ) и на неравенство(!= ).
 
@@ -41,6 +41,7 @@ class Bite_String : public MyString
 public:
     Bite_String();
     Bite_String(const char* stringP);
+    ~Bite_String();
     Bite_String(const Bite_String& object);
     Bite_String(Bite_String && object);
     bool IsCorrect(const char* stringP);
@@ -187,26 +188,29 @@ void Bite_String::empty()
     string = nullptr;
     str_Length = 0;
 }
+Bite_String::~Bite_String()
+{}
+
 int main()
 {          
 
-    //Bite_String b1("Rerw");
-    //cout << "\nObject b1:";
-    //b1.print();
+    Bite_String b1("Rerw");
+    cout << "\nObject b1:";
+    b1.print();
 
-   /* Bite_String b2("10011010101");*/
-    //cout << "\nObject b2:";
-    //b2.print();
+    Bite_String b2("10011010101");
+    cout << "\nObject b2:";
+    b2.print();
 
-    //Bite_String b3(b2);
-    //cout << "\nObject b3:";
-    //b3.print();
+    Bite_String b3(b2);
+    cout << "\nObject b3:";
+    b3.print();
 
-    //cout << "\nObject b1:";
-    //b1 = b3;
-    //b1.print();
+    cout << "\nObject b1:";
+    b1 = b3;
+    b1.print();
 
-    Bite_String b2 = "10001";
+    b2 = "10001";
     cout << "\nObject b2:";
     b2.print();
 
