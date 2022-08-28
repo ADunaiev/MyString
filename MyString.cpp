@@ -301,7 +301,7 @@ MyString::MyString(MyString&& object)
 	object.string = nullptr;
 	object.str_Length = 0;
 	number++;
-	cout << "MyString move constructed\n";
+	/*cout << "MyString move constructed\n";*/
 }
 
 MyString& MyString::operator=(const MyString& object)
@@ -325,7 +325,7 @@ MyString& MyString::operator=(const MyString& object)
 			}
 			*end = '\0';
 		}
-	cout << "MyString copy assigned\n";
+	/*cout << "MyString copy assigned\n";*/
 
 	return *this;
 }
@@ -344,7 +344,7 @@ MyString& MyString::operator=(MyString&& object)
 		object.string = nullptr;
 		object.str_Length = 0;
 	}
-	cout << "MyString move assigned\n";
+	/*cout << "MyString move assigned\n";*/
 
 	return *this;
 }
